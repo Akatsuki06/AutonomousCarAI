@@ -77,7 +77,7 @@ ti=time.time()
 if(inp=="train"):
     train()
 
-print('total time taken: 'time.time()-ti)
+print('total time taken: ',time.time()-ti)
 # In[ ]:
 
 
