@@ -1,4 +1,4 @@
-
+    
 # coding: utf-8
 
 # In[13]:
@@ -11,11 +11,14 @@ import cv2
 import pyscreenshot as ImageGrab
 import time
 
-import pickle
 import win32gui, win32ui, win32con, win32api
 from lib.game_position import get_position,get_screen
 from lib.process_image import process_img
 from lib.capture_keys import log_keys,get_keys
+
+import pyscreenshot as ImageGrab
+from pynput.keyboard import Key, Listener, Controller
+from keras.models import load_model
 
 
 def train():
@@ -44,26 +47,27 @@ def train():
     training_frames.to_csv('training_frames1.csv')
     training_keys.to_csv('training_keys1.csv')
 
-def drive(clf):
-    
+
+def drive():
+    model=load_model('simplemodel1.h5')
+    keyboard = Controller()
+    last_time=time.time()
     for i in range(1,4):
         print(i ,'seconds')
         time.sleep(1)
-    k=cv2.waitKey(1)
-    keyboard = Controller()
+        k=cv2.waitKey(1) 
     while True:
-        intsarray,height,width=get_screen(pos,win32gui, win32ui, win32con, win32api)
-        img=process_img(intsarray,height,width,np,cv2)
-        X=img.tolist()
-       # y=clf.predict(X)
-        #predict handle the game
-        
-
+        img = ImageGrab.grab(bbox=pos) 
+        img=process_img(img)
+        y_pred=model.predict(img) 
+        print(keys[get_key(y_pred)], end=" ")
+        # if(get_key(y_pred)==2):keyboard.press('A')
+        # if(get_key(y_pred)==3):keyboard.press('S')
         key = cv2.waitKey(1)
         if key == 27:
             cv2.destroyAllWindows()
             break;
-        keyboard.release('w')
+
 
 inp="train"
 t=input("press a key to start if *press space* screen has appeared")
@@ -77,7 +81,7 @@ ti=time.time()
 if(inp=="train"):
     train()
 
-print('total time taken: 'time.time()-ti)
+print('total time taken: ',time.time()-ti)
 # In[ ]:
 
 
