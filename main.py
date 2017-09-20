@@ -35,12 +35,12 @@ def train():
     while True:
         t=time.time()
         intsarray,height,width=get_screen(pos,win32gui, win32ui, win32con, win32api)
-        img=process_img(intsarray,height,width,np,cv2)
+        img=process_img(intsarray,height,width,np,cv2)        
         fps+=time.time()-t
         key = get_keys(win32api)
-        training_frames=training_frames.append(img.tolist())
+        training_frames=training_frames.append([img.flatten()])
         training_keys= training_keys.append([key])
-        print('.',end='')
+        print(';',end='')
         key = cv2.waitKey(1)
         if key == 27:
             cv2.destroyAllWindows()
@@ -49,7 +49,13 @@ def train():
     training_frames=training_frames[10:len(training_frames)-10]
     training_keys=training_keys[10:len(training_keys)-10]
     training_frames.to_csv('training_frames.csv',index=False)
-    training_keys.to_csv('training_keys.csv',index=False,header=['w','s','a','d','nk'])
+    training_keys.to_csv('training_keys.csv',index=False,header=['w','s','a','d'])#remove nk
+
+
+# In[ ]:
+
+
+
 
 
 # In[3]:
@@ -59,7 +65,7 @@ def getmax(y):
     max=0
     for i in range(0,len(y)):
         if(y[i]>y[max]):max=i
-    arr=['w','s','a','d','nk']
+    arr=['w','s','a','d']
     return arr[i]
     
 
@@ -91,8 +97,8 @@ def drive(model):
 
 pos=get_position(pag)
 print('frames will be captured at',pos)
-# if pos==None:
-#     pos=(812, 104, 512, 384)
+if pos==None:
+    pos=(843, 39, 512, 384)
 
 
 # In[5]:
@@ -101,19 +107,26 @@ print('frames will be captured at',pos)
 # inp=input('train or test?')
 # inp="train"
 # if(inp=="train"):
-# #     train()
+train()
 # from keras.models import load_model
 # model=load_model('model1.h5')
 # drive(model)
 
 
-# In[14]:
+# In[6]:
 
 
-# In[ ]:
+# df=pd.read_csv('data1/training_keys.csv')
+# df.shape
+# df[df['nk']>0].count()
 
 
+# In[7]:
 
+
+# from keras.models import load_model
+# model=load_model('model.h5')
+# drive(model)
 
 
 # In[ ]:
