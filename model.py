@@ -1,15 +1,26 @@
 
 # coding: utf-8
 
-# In[1]:
+# In[16]:
 
 
 import pandas as pd
 import numpy as np
-frames=pd.read_csv('data1/training_frames.csv')
-keys=pd.read_csv('data1/training_keys.csv')
-frames=frames.append(pd.read_csv('data2/training_frames.csv'))
-keys=keys.append(pd.read_csv('data2/training_keys.csv'))
+import glob
+from keras.models import load_model
+frames=pd.DataFrame()
+keys=pd.DataFrame()
+df_frames = (pd.read_csv(f) for f in glob.glob("data/*frames*.csv"))
+frames  = pd.concat(df_frames, ignore_index=True)
+df_keys = (pd.read_csv(f) for f in glob.glob("data/*keys*.csv"))
+keys = pd.concat(df_keys, ignore_index=True)
+# print(frames,keys)
+
+
+# In[2]:
+
+
+
 X=np.array(frames)
 y=np.array(keys)
 
@@ -27,27 +38,22 @@ frames.shape
 keys.head()
 
 
-# In[4]:
-
-
-
-print(X.shape[1])
-# X/=255
-print(X.shape)
-X=X.reshape((X.shape[0],30,30,1))
-
-
 # In[5]:
 
 
-print(X.shape,y.shape) #much better!!
+
+# X/=255
+print(X.shape)
+X=np.array(frames)/255 #works best
+X.shape=(X.shape[0],30,30,3)
+# X=X.reshape((X.shape[0],30,30,1))
+#change channel to 3 
 
 
 # In[6]:
 
 
-X=X.astype('float')
-X/=255
+print(X.shape,y.shape) #much better!!
 
 
 # In[7]:
@@ -59,12 +65,12 @@ from keras.layers import Conv2D, MaxPooling2D,Convolution2D,Dropout
 from keras.models import Sequential
 
 
-# In[8]:
+# In[9]:
 
 
-input_shape=(30, 30,1)
+input_shape=(30, 30,3)
 batch_size = 128
-num_classes = 5
+num_classes = 4
 epochs = 20
 model = Sequential()
 model = Sequential()
@@ -78,10 +84,10 @@ model.add(Dropout(0.25))
 model.add(Flatten())
 model.add(Dense(128, activation='relu'))
 model.add(Dropout(0.5))
-model.add(Dense(5, activation='softmax'))
+model.add(Dense(4, activation='softmax'))
 
 
-# In[9]:
+# In[10]:
 
 
 model.compile(loss=keras.losses.categorical_crossentropy,
@@ -95,23 +101,9 @@ model.fit(X, y,batch_size=batch_size,epochs=epochs,verbose=1)
 # score = model.evaluate(x_test, y_test, verbose=0)
 
 
-# In[13]:
-
-
-from keras.models import load_model
-model.save('model1.h5')
-
-
-# In[ ]:
+# In[11]:
 
 
 
-
-
-# In[ ]:
-
-
-
-
-
+model.save('model.h5')
 

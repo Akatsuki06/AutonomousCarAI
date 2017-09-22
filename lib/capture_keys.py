@@ -18,10 +18,10 @@ def get_keys(win32api):
         output = const.a
     elif 'D' in keys:
         output = const.d
-    elif 'W' in keys:
-        output = const.w
     elif 'S' in keys:
         output = const.s
+    elif 'W' in keys:
+        output = const.w
         
     print (output)
     return output
