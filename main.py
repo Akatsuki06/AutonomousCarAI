@@ -59,7 +59,8 @@ def move(y):
     elif arr[maxi]=='d':  right()
     
     
-def drive(model):
+def drive():
+    model=load_model('model/model.h5')
     for i in range(1,4):
         print(i ,'')
         time.sleep(1)
@@ -81,11 +82,10 @@ def drive(model):
 
 
 def main():
-	allfiles= glob.glob('data/*frames*.csv');
-	findex=len(allfiles)+1
-	filename_frames='data/trainig_frames-'+str(findex)+'.csv'
-	filename_keys='data/training_keys-'+str(findex)+'.csv'
-	model=load_model('model/model.h5')
+    allfiles= glob.glob('data/*frames*.csv');
+    findex=len(allfiles)+1
+    filename_frames='data/trainig_frames-'+str(findex)+'.csv'
+    filename_keys='data/training_keys-'+str(findex)+'.csv'
 
     pos=get_position(pag)
     print('Frames will be captured at : ',pos)
@@ -95,7 +95,7 @@ def main():
     if(inp==0):
         train()
     if(inp==1):
-        drive(model)
+        drive()
   
 if __name__== "__main__":
   main()
