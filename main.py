@@ -14,10 +14,15 @@ import glob
 from keras.models import load_model
 
 
-def train():
+def train(pos):
+    allfiles= glob.glob('data/*frames*.csv');
+    findex=len(allfiles)+1
+    filename_frames='data/trainig_frames-'+str(findex)+'.csv'
+    filename_keys='data/training_keys-'+str(findex)+'.csv'
     for i in range(1,4):
         print(i ,'')
         time.sleep(1)
+    print('writing to ' , filename_frames,' and ', filename_keys, ' ....')
     print('training now...(press esc to stop)')
     fps=0
     training_frames=pd.DataFrame()
@@ -30,14 +35,17 @@ def train():
         img=img.flatten()
         fps+=time.time()-t
         key = get_keys(win32api)
+        if key==0:
+            cv2.destroyAllWindows()
+            break;
         training_frames=training_frames.append([img])
         training_keys= training_keys.append([key])
         key = cv2.waitKey(1)
         if key == 27:
             cv2.destroyAllWindows()
             break;
-    print('\nfps: ',fps/len(training_frames))
-    print('trained-frames: ', len(training_frames))
+    print('\nfps: ',len(training_frames)/fps)
+    print('no of frames trained: ', len(training_frames))
     #discarding some of the frames
     training_frames=training_frames[10:len(training_frames)-10]
     training_keys=training_keys[10:len(training_keys)-10]
@@ -82,20 +90,23 @@ def drive():
 
 
 def main():
-    allfiles= glob.glob('data/*frames*.csv');
-    findex=len(allfiles)+1
-    filename_frames='data/trainig_frames-'+str(findex)+'.csv'
-    filename_keys='data/training_keys-'+str(findex)+'.csv'
+  
 
     pos=get_position(pag)
     print('Frames will be captured at : ',pos)
     if pos==None:
-        pos=(843, 31, 512, 384)#top-right corner
+        f=open('data/frames-pos.temp','r')
+        pos=eval(f.read())
+        f.close()
+    else:
+        f=open('data/frames-pos.temp','w')
+        f.write(str(pos))
+        f.close()
     inp=int(input('You want to Train(0) or Test(1)? Press 0 or 1.'))
     if(inp==0):
-        train()
+        train(pos)
     if(inp==1):
-        drive()
+        drive(pos)
   
 if __name__== "__main__":
   main()

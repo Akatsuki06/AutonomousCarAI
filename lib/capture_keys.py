@@ -14,6 +14,8 @@ def log_keys(win32api):
 def get_keys(win32api):
     keys=log_keys(win32api)
     output=[0,0,0,0]
+    if 'Q' in keys:
+        return 0
     if 'A'in keys:
         output = const.a
     elif 'D' in keys:
@@ -22,7 +24,7 @@ def get_keys(win32api):
         output = const.s
     elif 'W' in keys:
         output = const.w
-        
+    
     print (output)
     return output
 
