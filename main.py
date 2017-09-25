@@ -58,15 +58,15 @@ def move(y):
     for i in range(0,len(y)):
         if(y[i]>y[maxi]):maxi=i
         print(round(y[i],2),end=',')
-    print(arr[maxi])
     arr=['w','s','a','d']#no key is not required
+    print(arr[maxi])
     if arr[maxi]=='w' : accelerate()
     elif arr[maxi]=='s':  deaccelerate()
     elif arr[maxi]=='a':   left()
     elif arr[maxi]=='d':  right()
     
     
-def drive():
+def drive(pos):
     model=load_model('model/model.h5')
     for i in range(1,4):
         print(i ,'')
@@ -92,7 +92,6 @@ def main():
   
 
     pos=get_position(pag)
-    print('Frames will be captured at : ',pos)
     if pos==None:
         f=open('data/frames-pos.temp','r')
         pos=eval(f.read())
@@ -101,6 +100,8 @@ def main():
         f=open('data/frames-pos.temp','w')
         f.write(str(pos))
         f.close()
+    
+    print('Frames will be captured at : ',pos)
     inp=int(input('You want to Train(0) or Test(1)? Press 0 or 1.'))
     if(inp==0):
         train(pos)
