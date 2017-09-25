@@ -15,15 +15,14 @@ from keras.models import load_model
 
 
 def train(pos):
-    allfiles= glob.glob('data/*frames*.csv');
-    findex=len(allfiles)+1
+    findex=len(glob.glob('data/*frames*.csv'))+1
     filename_frames='data/trainig_frames-'+str(findex)+'.csv'
     filename_keys='data/training_keys-'+str(findex)+'.csv'
     for i in range(1,4):
         print(i ,'')
         time.sleep(1)
     print('writing to ' , filename_frames,' and ', filename_keys, ' ....')
-    print('training now...(press esc to stop)')
+    print('training now...(press Q to stop)')
     fps=0
     training_frames=pd.DataFrame()
     training_keys=pd.DataFrame()
@@ -60,7 +59,7 @@ def move(y):
         if(y[i]>y[maxi]):maxi=i
         print(round(y[i],2),end=',')
     print(arr[maxi])
-    arr=['w','s','a','d']
+    arr=['w','s','a','d']#no key is not required
     if arr[maxi]=='w' : accelerate()
     elif arr[maxi]=='s':  deaccelerate()
     elif arr[maxi]=='a':   left()

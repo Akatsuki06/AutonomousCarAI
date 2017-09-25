@@ -10,6 +10,7 @@ from keras.layers import Dense, Flatten,Conv2D, MaxPooling2D,Convolution2D,Dropo
 
 frames=pd.DataFrame()
 keys=pd.DataFrame()
+nooffiles=len(glob.glob("data/*frames*.csv"))
 df_frames = (pd.read_csv(f) for f in glob.glob("data/*frames*.csv"))
 frames  = pd.concat(df_frames, ignore_index=True)
 df_keys = (pd.read_csv(f) for f in glob.glob("data/*keys*.csv"))
@@ -17,13 +18,9 @@ keys = pd.concat(df_keys, ignore_index=True)
 X=np.array(frames)
 y=np.array(keys)
 
-
+print('no of files being trained : ' , nooffiles);
 frames.head()
 frames.shape
-
-
-# In[4]:
-
 
 keys.head()
 
@@ -54,9 +51,6 @@ model.add(Dropout(0.5))
 model.add(Dense(4, activation='softmax'))
 
 
-# In[9]:
-
-
 model.compile(loss=keras.losses.categorical_crossentropy,
               optimizer=keras.optimizers.Adam(),
               metrics=['accuracy'])
@@ -66,8 +60,8 @@ model.fit(X, y,batch_size=batch_size,epochs=epochs,verbose=1)
 #           validation_data=(x_test, y_test),
 #           callbacks=[history]
 # score = model.evaluate(x_test, y_test, verbose=0)
-
-model.save('model/model.h5')
+modelname= 'model/'+str(len(glob.glob("model/*")))
+model.save(modelname)
 
 
 
