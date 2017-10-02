@@ -37,11 +37,10 @@ batch_size = 128
 num_classes = 4
 epochs = 20
 model = Sequential()
-model = Sequential()
  
 model.add(Convolution2D(32, kernel_size=(5, 5), activation='relu',
                         input_shape=input_shape))
-model.add(Convolution2D(32, kernel_size=(3, 3), activation='relu'))
+model.add(Convolution2D(64, kernel_size=(3, 3), activation='relu'))
 model.add(MaxPooling2D(pool_size=(2,2)))
 model.add(Dropout(0.25))
  
@@ -60,7 +59,7 @@ model.fit(X, y,batch_size=batch_size,epochs=epochs,verbose=1)
 #           validation_data=(x_test, y_test),
 #           callbacks=[history]
 # score = model.evaluate(x_test, y_test, verbose=0)
-modelname= 'model/model-'+str(len(glob.glob("model/*")))+'.hd5'
+modelname= 'model/model-'+str(len(glob.glob("model/*")))+'.h5'
 model.save(modelname)
 
 
