@@ -67,7 +67,7 @@ def move(y):
     
     
 def drive(pos):
-    model=load_model('model/model-0.hd5')
+    model=load_model('model/model-0.h5')
     for i in range(1,4):
         print(i ,'')
         time.sleep(1)
@@ -90,26 +90,27 @@ def drive(pos):
 
 def main():
   
-
-    pos=get_position(pag)
-    if pos==None:
-        f=open('data/frames-pos.temp','r')
-        pos=eval(f.read())
-        f.close()
-    else:
-        f=open('data/frames-pos.temp','w')
-        f.write(str(pos))
-        f.close()
-    
-    print('Frames will be captured at : ',pos)
-    inp=int(input('You want to Train(0) or Test(1)? Press 0 or 1.'))
-    if(inp==0):
-        train(pos)
-    if(inp==1):
-        drive(pos)
-  
+    while True:
+        pos=get_position(pag)
+        if pos==None:
+            print('loading cached frame location ...')
+            f=open('data/frames-pos.temp','r')
+            pos=eval(f.read())
+            f.close()
+        else:
+            f=open('data/frames-pos.temp','w')
+            f.write(str(pos))
+            f.close()
+        
+        print('Frames will be captured at : ',pos)
+        inp=int(input('You want to Train(0) or Test(1)? Press 0 or 1. To exit press 2'))
+        if(inp==0):
+            train(pos)
+        if(inp==1):
+            drive(pos)
+        if(inp==2): break
 if __name__== "__main__":
-  main()
+    main()
 
 
 
