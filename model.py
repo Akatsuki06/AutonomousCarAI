@@ -60,7 +60,7 @@ model.fit(X, y,batch_size=batch_size,epochs=epochs,verbose=1)
 #           validation_data=(x_test, y_test),
 #           callbacks=[history]
 # score = model.evaluate(x_test, y_test, verbose=0)
-modelname= 'model/'+str(len(glob.glob("model/*")))
+modelname= 'model/model-'+str(len(glob.glob("model/*")))+'.hd5'
 model.save(modelname)
 
 

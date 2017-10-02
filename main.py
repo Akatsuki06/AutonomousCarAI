@@ -67,7 +67,7 @@ def move(y):
     
     
 def drive(pos):
-    model=load_model('model/model.h5')
+    model=load_model('model/model-0.hd5')
     for i in range(1,4):
         print(i ,'')
         time.sleep(1)
