@@ -1,7 +1,7 @@
 # **AutonomousCarAI**
 ## Description
 
-Training a car to drive autonomously. A deep learning implementation of a simple self driving car.  The aim of the project is to train a car to drive in a game terrain by capturing the frames and the keys. Each frame has been converted to a *1x2700* NumPy array which corresponds to keys *w,s,a,d*.
+Training a car to drive autonomously. This is a deep learning implementation of a simple self driving car.  The aim of the project is to train a car to drive in a game terrain by capturing the frames and the keys. Each frame has been converted to a *1x2700* NumPy array which corresponds to keys *w,s,a,d*.
 
 ## Prerequisites
 
