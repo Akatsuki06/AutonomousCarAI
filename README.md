@@ -18,8 +18,6 @@ The python libraries used to capture frames is ***win32api*** which is only avai
 **Testing** Testing here refers to driving. Once there is a trained model this option can be used. Just select the option and let the car drive itself to stop testing put the cursor on the opencv screen windows and press *esc*.
 
 
-
-
 ## Game Link
 
 The link of the car game to be trained
