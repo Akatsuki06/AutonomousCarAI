@@ -1,0 +1,14 @@
+name: opencv_env
+channels:
+- defaults
+dependencies:
+- numpy
+- pandas
+- opencv
+- keras
+- pip
+- pip:
+  - pyautogui
+  - pyscreenshot
+  - pypiwin32
+  - keyboard
