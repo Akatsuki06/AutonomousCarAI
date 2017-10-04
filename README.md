@@ -5,9 +5,7 @@ Training a car to drive autonomously. A deep learning implementation of a simple
 
 ## Prerequisites
 
-
-The Python libraries used to capture frames uses the ***win32api*** API, which is only available on Windows, meaning this can't run on Linux or macOS. As an alternative, ***pyscreenshot*** can be used in Linux but it's extremely slow to capture frames (~ 10fps). ***Keras*** with tensorflow backend is used to train the model. 
-
+The python library used to capture frames is ***win32api*** which is only available on windows. As an alteranative ***pyscreenshot*** can be used in linux but it is captures frames extremely slow (~ 10fps). ***Keras*** with tensorflow backend has been used to train the model. 
 
 
 ## How does it works?
