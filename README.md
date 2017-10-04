@@ -21,6 +21,7 @@ The Python libraries used to capture frames uses the ***Win32*** API, which is o
 
 
 
+
 ## Game Link
 
 The link of the car game used for training: 
