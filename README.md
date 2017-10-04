@@ -5,7 +5,8 @@ Training a car to drive autonomously. A deep learning implementation of a simple
 
 ## Prerequisites
 
-The Python libraries used to capture frames uses the ***Win32*** API, which is only available on Windows, meaning this can't run on Linux or macOS. As an alternative, ***pyscreenshot*** can be used in Linux but it's extremely slow to capture frames (~ 10fps). ***Keras*** with tensorflow backend is used to train the model. 
+
+The Python libraries used to capture frames uses the ***win32api*** API, which is only available on Windows, meaning this can't run on Linux or macOS. As an alternative, ***pyscreenshot*** can be used in Linux but it's extremely slow to capture frames (~ 10fps). ***Keras*** with tensorflow backend is used to train the model. 
 
 
 
@@ -19,12 +20,7 @@ The Python libraries used to capture frames uses the ***Win32*** API, which is o
     - **Testing**: Testing here refers to driving. Once there is a trained model this option can be used. Just select the option and let the car drive itself. To stop testing, put the cursor on the opencv screen window and press *esc*.
 
 
-
-
-
 ## Game Link
 
-The link of the car game used for training: 
+The link of the car game to be trained:
 https://www.dropbox.com/s/ul3s4i0trnohsih/game.zip?dl=0
-
-
