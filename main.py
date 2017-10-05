@@ -12,7 +12,7 @@ from lib.capture_keys import log_keys,get_keys
 from lib.directions import left,right,accelerate,deaccelerate
 import glob
 from keras.models import load_model
-
+import os
 
 def train(pos):
     findex=len(glob.glob('data/*frames*.csv'))+1
@@ -89,7 +89,11 @@ def drive(pos):
 
 
 def main():
-  
+    if not os.path.isdir(os.path.dirname(os.path.abspath(__file__))+'/data'):
+        os.makedirs('data')
+    if not os.path.isdir(os.path.dirname(os.path.abspath(__file__))+'/model'):
+        os.makedirs('model')
+    
     while True:
         pos=get_position(pag)
         if pos==None:
@@ -98,7 +102,7 @@ def main():
             pos=eval(f.read())
             f.close()
         else:
-            f=open('data/frames-pos.temp','w')
+            f=open('data/frames-pos.temp','w+')
             f.write(str(pos))
             f.close()
         
