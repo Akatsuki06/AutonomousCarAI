@@ -86,7 +86,18 @@ def drive(pos):
         if key == 27:
             cv2.destroyAllWindows()
             break;
-
+def get_pos():
+    pos=get_position(pag)
+    if pos==None:
+        print('loading cached frame location ...')
+        f=open('data/frames-pos.temp','r')
+        pos=eval(f.read())
+        f.close()
+    else:
+        f=open('data/frames-pos.temp','w+')
+        f.write(str(pos))
+        f.close()
+    return pos
 
 def main():
     if not os.path.isdir(os.path.dirname(os.path.abspath(__file__))+'/data'):
@@ -95,24 +106,12 @@ def main():
         os.makedirs('model')
     
     while True:
-        pos=get_position(pag)
-        if pos==None:
-            print('loading cached frame location ...')
-            f=open('data/frames-pos.temp','r')
-            pos=eval(f.read())
-            f.close()
-        else:
-            f=open('data/frames-pos.temp','w+')
-            f.write(str(pos))
-            f.close()
-        
+        pos=get_pos()
         print('Frames will be captured at : ',pos)
         inp=int(input('You want to Train(0) or Test(1)? Press 0 or 1. To exit press 2'))
-        if(inp==0):
-            train(pos)
-        if(inp==1):
-            drive(pos)
-        if(inp==2): break
+        if(inp==0):train(pos)
+        if(inp==1):drive(pos)
+        if(inp==2):break
 if __name__== "__main__":
     main()
 
