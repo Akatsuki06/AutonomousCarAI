@@ -21,17 +21,4 @@ The python library used to capture frames is ***win32api*** which is only availa
 ## Game Link
 
 The link of the car game to be trained:
-https://www.dropbox.com/s/ul3s4i0trnohsih/game.zip?dl=0 
-
-
-## Project contributors
-
-Akatsuki06
-faisal1337
-jessicamorim42
-SandySingh
-Helithumper
-skolerst
-sylveon
-hngouveia01
-aj07
+https://www.dropbox.com/s/ji1ywiaj7s1kin7/Game-Updated.rar?dl=0
