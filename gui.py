@@ -4,7 +4,7 @@ from main import *
 
 root = tk.Tk()
 # width x height + x_offset + y_offset:
-root.geometry("170x130+30+30")
+root.geometry("512*300+30+30")
 
 def train_model():
     pos=get_pos()
