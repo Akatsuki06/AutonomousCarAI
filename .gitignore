@@ -2,3 +2,4 @@ data/*
 model/*
 /__pycache__
 __pycache__/
+game/*
