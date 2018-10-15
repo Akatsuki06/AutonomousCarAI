@@ -21,7 +21,7 @@ The python library used to capture frames is ***Win32api*** which is only availa
 ## How does it works?
 
  1. Run ***game.exe*** in 512x384. 
- 2. Once the red screen with the note "Press Space" appears run ***main.py***. Let main.py know the location of the game. So don't press space until it finds the game screen.
+ 2. Once the red screen with the note "Press Space" appears, run ***main.py***. Let main.py locate the game window. So don't press space until it finds the game screen.
  3. ***main.py*** will capture the location of the game and will ask whether to train, test or quit. 
  4. Choose an option:
     - **Training**: use *w*, *a*, *s*, *d* to move the car on the road and press *q* to stop training. This will collect data and store it to `data/` folder. Once data has been collected, run ***model.py*** to create a trained model for the self-driving car in the `model/` folder. Now this model can be used for testing.
